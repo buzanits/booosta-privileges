@@ -191,8 +191,15 @@ class Userfield
 
   protected function proc_action($param)
   {
+    #\booosta\debug('is_object: ' . is_object($this->dbobj)); if(is_object($this->dbobj)) \booosta\debug('fieldname: ' . $this->dbobj->get($this->fieldname)); \booosta\debug('fieldval: ' . $this->fieldval);
+    $this->check_dbobj();
     if(!is_object($this->dbobj)) return false;
     if($this->dbobj->get($this->fieldname) != $this->fieldval) $this->obj->raise_error('Fehlende Berechtigung zum Zugriff auf das Objekt!');
+  }
+
+  protected function check_dbobj()
+  {
+    if(!is_object($this->dbobj) && is_object($this->obj)) $this->dbobj = $this->obj->get_dbobject();
   }
 
   public function action_edit($param) { $this->proc_action($param); }
