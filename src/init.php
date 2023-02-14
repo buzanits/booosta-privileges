@@ -137,7 +137,7 @@ trait Webapp
   {
     $uf = $this->use_userfield;
     if(!is_object($uf)) $this->raise_error('No object provided to apply_userfield_obj()');
-    #\booosta\debug("action: $action");
+    #\booosta\Framework::debug("action: $action");
 
     switch($action):
     case 'init': $uf->init($param); break;
@@ -146,6 +146,7 @@ trait Webapp
     case 'edit': $uf->edit($param); break;
     case 'action edit': $uf->action_edit($param); break;
     case 'delete': $uf->delete($param); break;
+    case 'action delete': $uf->action_delete($param); break;
     case 'action subtables': $uf->action_subtables($param); break;
     case 'sub:new': $uf->sub_new($param); break;
     case 'sub:edit': $uf->sub_edit($param); break;
@@ -165,6 +166,7 @@ class Userfield
   {
     $this->obj = $webapp_obj;
     $this->dbobj = $webapp_obj->get_dbobject();
+    #\booosta\Framework::debug("dbobj: " . is_object($this->dbobj));
     $this->init();
   }
 
