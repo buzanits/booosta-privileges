@@ -1,8 +1,10 @@
 <?php
 namespace booosta\privileges;
 
-\booosta\Framework::add_module_trait('webapp', 'privileges\webapp');
-\booosta\Framework::add_module_trait('genericuser', 'privileges\genericuser');
+use \booosta\Framework as b;
+
+b::add_module_trait('webapp', 'privileges\webapp');
+b::add_module_trait('genericuser', 'privileges\genericuser');
 
 trait Webapp
 {
@@ -245,12 +247,12 @@ trait Genericuser
   public function has_privilege($privilege_name)
   {
     $this->init_db();
-    $privilege_id = $this->get_privilege_id($privilege_name);
+    #$privilege_id = $this->get_privilege_id($privilege_name);
     $allprivs = $this->get_all_privileges();
     if(strstr(print_r($allprivs, true), 'ERROR')) return $allprivs;
 
-    #print "pn: $privilege_name"; print_r($allprivs);
-    return in_array($privilege_id, $allprivs);
+    #b::debug($privilege_name); b::debug($allprivs);
+    return in_array($privilege_name, $allprivs);
   }
 
   public function has_role($role_name)
