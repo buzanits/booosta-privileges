@@ -174,7 +174,7 @@ class Userfield
 
   public function __call($name, $args)
   {
-    if(method_exists($this, $name)) call_user_func_array($name, $args);
+    if(method_exists($this, $name)) call_user_func_array([$this, $name], $args);
   }
 
   public function action_default($param)
